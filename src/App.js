@@ -6,15 +6,21 @@ import Dia from "./Dia";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { cidade: "", descricao: "", icon: "", forecast: [] };
+    this.state = {
+      cidade: "",
+      descricao: "",
+      icon: "",
+      forecast: [],
+      main: ""
+    };
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
     const weatherUrl =
-      "http://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439";
+      "http://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439&units=metric&lang=pt";
     const foreacastUrl =
-      "http://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439&units=metric";
+      "http://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439&units=metric&lang=pt";
 
     fetch(weatherUrl)
       .then(response => {
@@ -31,7 +37,8 @@ class App extends Component {
             ...this.state,
             cidade: data.name,
             descricao: data.weather[0].description,
-            icon: data.weather[0].icon
+            icon: data.weather[0].icon,
+            main: data.main
           });
           console.log(data.name);
         });
@@ -47,14 +54,6 @@ class App extends Component {
     });
   }
   render() {
-    let semana = [
-      { dia: "Segunda", clima: "sun", minima: 20, maxima: 35 },
-      { dia: "Terça", clima: "cloud-sun", minima: 22, maxima: 32 },
-      { dia: "Quarta", clima: "cloud-sun-rain", minima: 25, maxima: 36 },
-      { dia: "Quinta", clima: "sun", minima: 27, maxima: 30 },
-      { dia: "Sexta", clima: "cloud-showers-heavy", minima: 23, maxima: 24 }
-    ];
-
     return (
       <div className="App">
         <h1>Tempo em {this.state.cidade}</h1>
@@ -63,18 +62,12 @@ class App extends Component {
           alt="icone"
         />
         <p>{this.state.descricao}</p>
-        {semana.map((e, i) => (
-          <Dia key={i} previsao={e} />
-        ))}
+        <p>{this.state.main.temp}</p>
 
-        <div>
-          {this.state.forecast.map((value, index) => (
-            <div>
-              <p>Data e hora : {value.dt_txt}</p>
-              <p>Temperatura : {value.main.temp}º</p>
-            </div>
-          ))}
-        </div>
+        <h2>Próximos dias</h2>
+        {this.state.forecast.map((value, index) => (
+          <Dia key={index} previsao={value} />
+        ))}
       </div>
     );
   }

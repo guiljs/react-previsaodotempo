@@ -6,10 +6,15 @@ class Dia extends Component {
     return (
       <React.Fragment>
         <div className="card">
-        <i className={"fa fa-"+previsao.clima}></i> 
-        <p>{previsao.dia}</p>        
-        <p>Mínima : {previsao.minima}º</p>
-        <p>Máxima : {previsao.maxima}º</p>        
+        <p>{previsao.dt_txt}</p>     
+        <img
+          src={"https://openweathermap.org/img/w/" + previsao.weather[0].icon + ".png"}
+          alt={previsao.weather[0].description}
+        />
+        
+        <p>{previsao.weather[0].description}</p>   
+        <p>Mínima : {previsao.main.temp_min}º</p>
+        <p>Máxima : {previsao.main.temp_max}º</p>        
         </div>
 
         
