@@ -1,4 +1,4 @@
-A simple weather forecast sample with React.
+A simple weather forecast sample with React.  
 Um simples exemplo de Previsão do Tempo com React.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
