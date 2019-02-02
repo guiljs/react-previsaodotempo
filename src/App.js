@@ -65,9 +65,17 @@ class App extends Component {
         <p>{this.state.main.temp}</p>
 
         <h2>Próximos dias</h2>
-        {this.state.forecast.map((value, index) => (
-          <Dia key={index} previsao={value} />
-        ))}
+        {this.state.forecast
+          .filter((value, index) => {
+            let d = new Date(value.dt*1000);
+             return d.getHours() === 10;
+            // console.log(value.dt)
+            // console.log( d.getHours());
+            // return true;
+          })
+          .map((value, index) => (
+            <Dia key={index} previsao={value} />
+          ))}
       </div>
     );
   }
