@@ -9,9 +9,7 @@ class Dia extends Component {
         <i className={"fa fa-"+previsao.clima}></i> 
         <p>{previsao.dia}</p>        
         <p>Mínima : {previsao.minima}º</p>
-        <p>Máxima : {previsao.maxima}º</p>
-
-        
+        <p>Máxima : {previsao.maxima}º</p>        
         </div>
 
         
