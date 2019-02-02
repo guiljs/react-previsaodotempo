@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+
+import Dia from "./Dia";
 
 class App extends Component {
   render() {
+    let semana = [
+      { dia: "Segunda", clima: "sun", minima: 20, maxima: 35 },
+      { dia: "Terça", clima: "cloud-sun", minima: 22, maxima: 32 },
+      { dia: "Quarta", clima: "cloud-sun-rain", minima: 25, maxima: 36 },
+      { dia: "Quinta", clima: "sun", minima: 27, maxima: 30 },
+      { dia: "Sexta", clima: "cloud-showers-heavy", minima: 23, maxima: 24 }
+    ];
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {semana.map((e, i) => (
+          <Dia previsao={e} />
+        ))}
       </div>
     );
   }
