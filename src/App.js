@@ -6,13 +6,17 @@ import Dia from "./Dia";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { cidade: "", descricao: "", icon: "" };
+    this.state = { cidade: "", descricao: "", icon: "", forecast: [] };
     this.componentDidMount = this.componentDidMount.bind(this);
   }
+
   componentDidMount() {
-    fetch(
-      "http://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439"
-    )
+    const weatherUrl =
+      "http://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439";
+    const foreacastUrl =
+      "http://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439&units=metric";
+
+    fetch(weatherUrl)
       .then(response => {
         if (response.status !== 200) {
           console.log(
@@ -24,9 +28,10 @@ class App extends Component {
         // Examine the text in the response
         response.json().then(data => {
           this.setState({
+            ...this.state,
             cidade: data.name,
             descricao: data.weather[0].description,
-            icon:data.weather[0].icon
+            icon: data.weather[0].icon
           });
           console.log(data.name);
         });
@@ -34,6 +39,12 @@ class App extends Component {
       .catch(function(err) {
         console.log("Fetch Error :-S", err);
       });
+
+    fetch(foreacastUrl).then(r => {
+      r.json().then(data => {
+        this.setState({ ...this.state, forecast: data.list });
+      });
+    });
   }
   render() {
     let semana = [
@@ -55,6 +66,15 @@ class App extends Component {
         {semana.map((e, i) => (
           <Dia key={i} previsao={e} />
         ))}
+
+        <div>
+          {this.state.forecast.map((value, index) => (
+            <div>
+              <p>Data e hora : {value.dt_txt}</p>
+              <p>Temperatura : {value.main.temp}º</p>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
