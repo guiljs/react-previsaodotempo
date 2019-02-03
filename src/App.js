@@ -6,9 +6,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cidade: "",
+      cidade: "Sao Paulo",
       descricao: "",
-      icon: "",
+      icon: "01",
       forecast: [],
       main: ""
     };
@@ -16,11 +16,21 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.chamaAPI();
+  }
+  chamaAPI() {
+    console.log("Chama API");
+    console.log(this.state.cidade);
     const weatherUrl =
-      "http://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439&units=metric&lang=pt";
+      "http://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
+      this.state.cidade +
+      "&units=metric&lang=pt";
     const foreacastUrl =
-      "http://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&id=3448439&units=metric&lang=pt";
+      "http://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
+      this.state.cidade +
+      "&units=metric&lang=pt";
 
+    console.log(weatherUrl);
     fetch(weatherUrl)
       .then(response => {
         if (response.status !== 200) {
@@ -29,7 +39,6 @@ class App extends Component {
           );
           return;
         }
-
         // Examine the text in the response
         response.json().then(data => {
           this.setState({
@@ -45,16 +54,29 @@ class App extends Component {
       .catch(function(err) {
         console.log("Fetch Error :-S", err);
       });
-
     fetch(foreacastUrl).then(r => {
       r.json().then(data => {
         this.setState({ ...this.state, forecast: data.list });
       });
     });
   }
+
   render() {
     return (
       <div className="App">
+        <button
+          value="Rio de Janeiro"
+          onClick={() => {
+            this.setState(
+              { ...this.state, cidade: "Rio de Janeiro" },
+              function() {
+                this.chamaAPI();
+              }
+            );
+          }}
+        >
+          Previsão Rio de Janeiro
+        </button>
         <h1>Tempo em {this.state.cidade}</h1>
         <img
           src={"https://openweathermap.org/img/w/" + this.state.icon + ".png"}
