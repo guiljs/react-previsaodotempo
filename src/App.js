@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-
 import Dia from "./Dia";
 
 class App extends Component {
@@ -67,14 +66,19 @@ class App extends Component {
         <h2>Próximos dias</h2>
         {this.state.forecast
           .filter((value, index) => {
-            let d = new Date(value.dt*1000);
-             return d.getHours() === 10;
-            // console.log(value.dt)
-            // console.log( d.getHours());
-            // return true;
+            let d = new Date(value.dt * 1000);
+            return d.getHours() === 10;
           })
           .map((value, index) => (
-            <Dia key={index} previsao={value} />
+            <React.Fragment key={index}>
+              <Dia
+                key={index}
+                previsao={value}
+                onClick={() => {
+                  console.log(value.dt);
+                }}
+              />
+            </React.Fragment>
           ))}
       </div>
     );
