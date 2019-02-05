@@ -105,7 +105,7 @@ class Previsao extends Component {
                 alt="icone"
               />
               <p>{this.state.descricao}</p>
-              <p>{this.state.main.temp}</p>
+              <p>{this.state.main.temp}º</p>
             </p>
           </div>
         </div>

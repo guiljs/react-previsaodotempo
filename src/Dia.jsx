@@ -9,10 +9,10 @@ class Dia extends Component {
           className="card  float-left text-white bg-primary mb-3"
           onClick={this.props.onClick}
         >
-          <h4 className="card-header">
-            {new Date(previsao.dt * 1000).toLocaleDateString("pt-BR")}
-          </h4>
           <div className="card-body">
+            <h5 className="card-title">
+              {new Date(previsao.dt * 1000).toLocaleDateString("pt-BR")}
+            </h5>
             <img
               src={
                 "https://openweathermap.org/img/w/" +
