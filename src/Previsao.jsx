@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Dia from "./Dia";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Semana from "./Semana";
+import Agora from "./Agora";
 
 class Previsao extends Component {
   constructor(props) {
@@ -94,7 +95,7 @@ class Previsao extends Component {
       <div className="container">
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Ooops</Modal.Title>
+            <Modal.Title>Opa!</Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.state.message}</Modal.Body>
           <Modal.Footer>
@@ -129,39 +130,14 @@ class Previsao extends Component {
           </div>
         </div>
 
-        <div className="card text-left mb-3">
-          <div className="card-body">
-            <h4 className="card-title">Agora em {this.state.cidade}</h4>
-            <p className="card-text">
-              <img
-                src={
-                  "https://openweathermap.org/img/w/" + this.state.icon + ".png"
-                }
-                alt="icone"
-              />
-              <p>{this.state.descricao}</p>
-              <p>{this.state.main.temp}º</p>
-            </p>
-          </div>
-        </div>
+        <Agora
+          cidade={this.state.cidade}
+          icon={this.state.icon}
+          descricao={this.state.descricao}
+          main={this.state.main}
+        />
 
-        <h4>Próximos dias</h4>
-        {this.state.forecast
-          .filter((value, index) => {
-            let d = new Date(value.dt * 1000);
-            return d.getHours() === 10;
-          })
-          .map((value, index) => (
-            <React.Fragment key={index}>
-              <Dia
-                key={index}
-                previsao={value}
-                onClick={() => {
-                  console.log(value.dt);
-                }}
-              />
-            </React.Fragment>
-          ))}
+        <Semana forecast={this.state.forecast} />
       </div>
     );
   }
