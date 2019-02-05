@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Dia from "./Dia";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 class Previsao extends Component {
   constructor(props) {
@@ -9,10 +11,13 @@ class Previsao extends Component {
       descricao: "",
       icon: "01",
       forecast: [],
-      main: ""
+      main: "",
+      show: false
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleChange(e) {
@@ -22,6 +27,15 @@ class Previsao extends Component {
   componentDidMount() {
     this.chamaAPI();
   }
+
+  handleClose() {
+    this.setState({ ...this.state, show: false });
+  }
+
+  handleShow() {
+    this.setState({ ...this.state, show: true });
+  }
+
   chamaAPI() {
     console.log("Chama API");
     console.log(this.state.cidade);
@@ -58,7 +72,17 @@ class Previsao extends Component {
       .catch(function(err) {
         console.log("Fetch Error :-S", err);
       });
+
     fetch(foreacastUrl).then(r => {
+      if (r.status !== 200) {
+        this.setState({ forecast: [] });
+        console.log(r);
+        r.json().then(data => {
+          //alert(data.message);
+          this.setState({ ...this.state, show: true, message: data.message });
+        });
+        return;
+      }
       r.json().then(data => {
         this.setState({ ...this.state, forecast: data.list });
       });
@@ -68,18 +92,31 @@ class Previsao extends Component {
   render() {
     return (
       <div className="container">
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Ooops</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{this.state.message}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Fechar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <h1>Previsão do Tempo</h1>
-        <div class="input-group mb-3">
+        <div className="input-group mb-3">
           <input
             type="search"
-            class="form-control"
+            className="form-control"
             name="txtCidade"
             id="txtCidade"
             aria-describedby="helpId"
             placeholder="Cidade"
             onChange={this.handleChange}
           />
-          <div class="input-group-append">
+
+          <div className="input-group-append">
             <button
               value="Rio de Janeiro"
               onClick={() => {
@@ -92,10 +129,10 @@ class Previsao extends Component {
           </div>
         </div>
 
-        <div class="card text-left mb-3">
-          <div class="card-body">
-            <h4 class="card-title">Agora em {this.state.cidade}</h4>
-            <p class="card-text">
+        <div className="card text-left mb-3">
+          <div className="card-body">
+            <h4 className="card-title">Agora em {this.state.cidade}</h4>
+            <p className="card-text">
               <img
                 src={
                   "https://openweathermap.org/img/w/" + this.state.icon + ".png"
