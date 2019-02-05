@@ -107,27 +107,24 @@ class Previsao extends Component {
             </p>
           </div>
         </div>
-        <div className="card">
-          <div class="card-body">
-            <h4 className="card-title">Próximos dias</h4>
-            {this.state.forecast
-              .filter((value, index) => {
-                let d = new Date(value.dt * 1000);
-                return d.getHours() === 10;
-              })
-              .map((value, index) => (
-                <React.Fragment key={index}>
-                  <Dia
-                    key={index}
-                    previsao={value}
-                    onClick={() => {
-                      console.log(value.dt);
-                    }}
-                  />
-                </React.Fragment>
-              ))}
-          </div>
-        </div>
+
+        <h4>Próximos dias</h4>
+        {this.state.forecast
+          .filter((value, index) => {
+            let d = new Date(value.dt * 1000);
+            return d.getHours() === 10;
+          })
+          .map((value, index) => (
+            <React.Fragment key={index}>
+              <Dia
+                key={index}
+                previsao={value}
+                onClick={() => {
+                  console.log(value.dt);
+                }}
+              />
+            </React.Fragment>
+          ))}
       </div>
     );
   }

@@ -6,7 +6,7 @@ class Dia extends Component {
     return (
       <React.Fragment>
         <div
-          className="card float-left text-white bg-primary m-3"
+          className="card float-left text-white bg-primary mr-3"
           onClick={this.props.onClick}
         >
           <div className="card-body">
