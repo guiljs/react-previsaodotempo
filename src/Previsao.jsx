@@ -68,9 +68,8 @@ class Previsao extends Component {
   render() {
     return (
       <div className="container">
-      <h1>Previsão do Tempo</h1>
-        <div className="form-group">
-          <label for="txtCidade">Pesquise uma cidade</label>
+        <h1>Previsão do Tempo</h1>
+        <div class="input-group mb-3">
           <input
             type="search"
             class="form-control"
@@ -80,19 +79,18 @@ class Previsao extends Component {
             placeholder="Cidade"
             onChange={this.handleChange}
           />
-          <small id="helpId" class="form-text text-muted">
-            Digite a cidade
-          </small>
+          <div class="input-group-append">
+            <button
+              value="Rio de Janeiro"
+              onClick={() => {
+                this.chamaAPI();
+              }}
+              className="btn btn-primary mb-3"
+            >
+              Buscar
+            </button>
+          </div>
         </div>
-        <button
-          value="Rio de Janeiro"
-          onClick={() => {
-            this.chamaAPI();
-          }}
-          className="btn btn-primary mb-3"
-        >
-          Previsão da cidade
-        </button>
 
         <div class="card text-left mb-3">
           <div class="card-body">
