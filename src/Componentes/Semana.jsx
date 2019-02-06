@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Dia from "./Dia";
+import ResumoDia from "./ResumoDia";
 class Semana extends Component {
   render() {
     return (
@@ -12,7 +12,7 @@ class Semana extends Component {
           })
           .map((value, index) => (
             <React.Fragment key={index}>
-              <Dia
+              <ResumoDia
                 key={index}
                 previsao={value}
                 onClick={() => {
