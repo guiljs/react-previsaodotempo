@@ -4,7 +4,7 @@ class Semana extends Component {
   render() {
     return (
       <div>
-        <h4>Próximos dias</h4>
+        <h4>Próximos dias</h4>        
         {this.props.forecast
           .filter((value, index) => {
             let d = new Date(value.dt * 1000);

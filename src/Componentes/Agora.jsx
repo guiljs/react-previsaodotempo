@@ -6,7 +6,7 @@ class Agora extends Component {
       <div className="card text-left mb-3">
         <div className="card-body">
           <h4 className="card-title">Agora em {this.props.cidade}</h4>
-          <p className="card-text">
+          <div className="card-text">
             <img
               src={
                 "https://openweathermap.org/img/w/" + this.props.icon + ".png"
@@ -15,7 +15,7 @@ class Agora extends Component {
             />
             <p>{this.props.descricao}</p>
             <p>{this.props.main.temp}º</p>
-          </p>
+          </div>
         </div>
       </div>
     );

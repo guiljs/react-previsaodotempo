@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Semana from "./Semana";
 import Agora from "./Agora";
+import Wait from "./Wait";
 
 class Previsao extends Component {
   constructor(props) {
@@ -50,6 +51,7 @@ class Previsao extends Component {
       "&units=metric&lang=pt";
 
     console.log(weatherUrl);
+    this.setState({ ...this.state, waitVisible: true });
     fetch(weatherUrl)
       .then(response => {
         if (response.status !== 200) {
@@ -74,25 +76,34 @@ class Previsao extends Component {
         console.log("Fetch Error :-S", err);
       });
 
-    fetch(foreacastUrl).then(r => {
-      if (r.status !== 200) {
-        this.setState({ forecast: [] });
-        console.log(r);
-        r.json().then(data => {
-          //alert(data.message);
-          this.setState({ ...this.state, show: true, message: data.message });
-        });
-        return;
-      }
-      r.json().then(data => {
-        this.setState({ ...this.state, forecast: data.list });
+    fetch(foreacastUrl)
+      .then(r => {
+        if (r.status !== 200) {
+          this.setState({ forecast: [] });
+          console.log(r);
+          r.json().then(data => {
+            //alert(data.message);
+            this.setState({ ...this.state, show: true, message: data.message });
+          });
+          return;
+        }
+        r.json()
+          .then(data => {
+            this.setState({ ...this.state, forecast: data.list });
+          })
+          .then(this.setState({ ...this.state, waitVisible: false }));
+      })
+
+      .catch(function(err) {
+        console.log("Fetch Error : -s", err);
       });
-    });
   }
 
   render() {
     return (
       <div className="container">
+        <Wait visible={this.state.waitVisible} />
+
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Opa!</Modal.Title>
