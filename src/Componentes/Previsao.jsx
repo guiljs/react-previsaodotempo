@@ -58,6 +58,7 @@ class Previsao extends Component {
           console.log(
             "Looks like there was a problem. Status Code: " + response.status
           );
+          this.setState({ ...this.state, waitVisible: false });
           return;
         }
         // Examine the text in the response
@@ -74,6 +75,7 @@ class Previsao extends Component {
       })
       .catch(function(err) {
         console.log("Fetch Error :-S", err);
+        this.setState({ ...this.state, waitVisible: false });
       });
 
     fetch(foreacastUrl)
@@ -96,6 +98,7 @@ class Previsao extends Component {
 
       .catch(function(err) {
         console.log("Fetch Error : -s", err);
+        this.setState({ ...this.state, waitVisible: false });
       });
   }
 
