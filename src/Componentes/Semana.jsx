@@ -6,10 +6,10 @@ class Semana extends Component {
       <div>
         <h4>Próximos dias</h4>        
         {this.props.forecast
-          .filter((value, index) => {
-            let d = new Date(value.dt * 1000);
-            return d.getHours() === 10;
-          })
+          // .filter((value, index) => {
+          //   let d = new Date(value.dt * 1000);
+          //   return d.getHours() === 10;
+          // })
           .map((value, index) => (
             <React.Fragment key={index}>
               <ResumoDia
