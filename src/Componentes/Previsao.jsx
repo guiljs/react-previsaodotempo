@@ -50,11 +50,11 @@ class Previsao extends Component {
     const weatherUrl =
       "https://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
       this.state.cidade +
-      "&units=metric&lang=pt";
+      "&units=metric&lang=en";
     const foreacastUrl =
       "https://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
       this.state.cidade +
-      "&units=metric&lang=pt";
+      "&units=metric&lang=en";
 
     console.log(weatherUrl);
     this.setState({ ...this.state, waitVisible: true });
@@ -71,7 +71,8 @@ class Previsao extends Component {
         response.json().then(data => {
           this.setState({
             ...this.state,
-            cidade: data.name,
+            city: data.name,
+            country: data.sys.country,
             descricao: data.weather[0].description,
             icon: data.weather[0].icon,
             main: data.main
@@ -152,7 +153,8 @@ class Previsao extends Component {
         </div>
 
         <Agora
-          cidade={this.state.cidade}
+          cidade={this.state.city}
+          country={this.state.country}
           icon={this.state.icon}
           descricao={this.state.descricao}
           main={this.state.main}

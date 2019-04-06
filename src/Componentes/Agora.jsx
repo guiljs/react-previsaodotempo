@@ -5,7 +5,16 @@ class Agora extends Component {
     return (
       <div className="card text-left mb-3">
         <div className="card-body">
-          <h4 className="card-title">Now at {this.props.cidade}</h4>
+          <p className="card-title h4">
+            Now at {this.props.cidade} - {this.props.country}{" "}
+            <img
+              src={
+                "https://www.countryflags.io/" +
+                this.props.country +
+                "/shiny/64.png"
+              }
+            />
+          </p>
           <div className="card-text">
             <img
               src={
@@ -13,8 +22,10 @@ class Agora extends Component {
               }
               alt="icone"
             />
-            <p>{this.props.descricao}</p>
-            <p>{this.props.main.temp}º</p>
+            <div className="row">
+              <div className="col-2">{this.props.descricao}</div>
+              <div className="col-10">Temp : {this.props.main.temp}º</div>
+            </div>
           </div>
         </div>
       </div>
