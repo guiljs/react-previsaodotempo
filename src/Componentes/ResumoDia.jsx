@@ -23,8 +23,8 @@ class Dia extends Component {
             />
 
             <p>{previsao.weather[0].description}</p>
-            <p>Mínima : {previsao.main.temp_min}º</p>
-            <p>Máxima : {previsao.main.temp_max}º</p>
+            <p>Temp : {previsao.main.temp}º</p>
+            
           </div>
         </div>
       </React.Fragment>

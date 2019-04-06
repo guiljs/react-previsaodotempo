@@ -30,6 +30,12 @@ class Previsao extends Component {
     this.chamaAPI();
   }
 
+  handleKeyPress = event => {
+    if (event.key == "Enter") {
+      this.chamaAPI();
+    }
+  };
+
   handleClose() {
     this.setState({ ...this.state, show: false });
   }
@@ -119,7 +125,7 @@ class Previsao extends Component {
           </Modal.Footer>
         </Modal>
 
-        <h1>Previsão do Tempo</h1>
+        <h1>Weather Forecast</h1>
         <div className="input-group mb-3">
           <input
             type="search"
@@ -127,8 +133,9 @@ class Previsao extends Component {
             name="txtCidade"
             id="txtCidade"
             aria-describedby="helpId"
-            placeholder="Cidade"
+            placeholder="Type city name here"
             onChange={this.handleChange}
+            onKeyPress={this.handleKeyPress}
           />
 
           <div className="input-group-append">
@@ -139,7 +146,7 @@ class Previsao extends Component {
               }}
               className="btn btn-primary mb-3"
             >
-              Buscar
+              Go
             </button>
           </div>
         </div>
