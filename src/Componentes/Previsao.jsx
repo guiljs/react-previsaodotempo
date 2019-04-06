@@ -9,9 +9,9 @@ class Previsao extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cidade: "Sao Paulo",
+      cidade: "Toronto",
       descricao: "",
-      icon: "01",
+      icon: "01d",
       forecast: [],
       main: "",
       show: false

@@ -2,14 +2,25 @@ import React, { Component } from "react";
 import ResumoDia from "./ResumoDia";
 class Semana extends Component {
   render() {
+    let previousDay = '';
+
     return (
       <div>
         <h4>Próximos dias</h4>        
-        {this.props.forecast
-          // .filter((value, index) => {
-          //   let d = new Date(value.dt * 1000);
-          //   return d.getHours() === 10;
-          // })
+        {       
+          this.props.forecast
+          .filter((value, index) => {
+            let d = new Date(value.dt * 1000);
+            if(d.getDay()!=previousDay)
+            {
+              previousDay = d.getDay();
+              return true;
+              
+            }else{
+              return false;
+            }
+            
+          })
           .map((value, index) => (
             <React.Fragment key={index}>
               <ResumoDia
