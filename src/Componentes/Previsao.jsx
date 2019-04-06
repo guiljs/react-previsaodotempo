@@ -42,11 +42,11 @@ class Previsao extends Component {
     console.log("Chama API");
     console.log(this.state.cidade);
     const weatherUrl =
-      "http://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
+      "https://api.openweathermap.org/data/2.5/weather?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
       this.state.cidade +
       "&units=metric&lang=pt";
     const foreacastUrl =
-      "http://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
+      "https://api.openweathermap.org/data/2.5/forecast?APPID=92f8f0fbf240fc46079bafca7aa56c15&q=" +
       this.state.cidade +
       "&units=metric&lang=pt";
 
