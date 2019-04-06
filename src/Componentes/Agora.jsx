@@ -23,8 +23,8 @@ class Agora extends Component {
               alt="icone"
             />
             <div className="row">
-              <div className="col-2">{this.props.descricao}</div>
-              <div className="col-10">Temp : {this.props.main.temp}º</div>
+              <div className="col-4">{this.props.descricao}</div>
+              <div className="col-8">Temp : {this.props.main.temp}º</div>
             </div>
           </div>
         </div>
